@@ -4,10 +4,12 @@
   "description": "webgl programming guide",
   "main": "index.js",
   "scripts": {
-    "build": "tsc",
+    "build": "npm run clean && tsc && npm run copy",
     "start": "npm run serve",
-    "serve": "node dist/server.js",
-    "dev": "tsc -w"
+    "serve": "node ./dist/server.js",
+    "dev": "tsc -w",
+    "clean": "rm -rf ./dist",
+    "copy": "find src -name *.html -type f -exec rsync -avR {} dist \\;"
   },
   "keywords": [
     "webgl"
