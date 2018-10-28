@@ -5,9 +5,8 @@
   "main": "index.js",
   "scripts": {
     "build": "npm run clean && tsc && npm run copy",
-    "start": "npm run serve",
-    "serve": "node ./dist/server.js",
-    "dev": "tsc -w",
+    "serve": "npm run copy && ts-node ./server/server.ts",
+    "start": "tsc -w",
     "clean": "rm -rf ./dist",
     "copy": "copyfiles -V -u 1 ./src/**/*.html dist"
   },
@@ -17,6 +16,8 @@
   "author": "Gen Ichino",
   "license": "MIT",
   "devDependencies": {
+    "@types/express": "^4.16.0",
+    "@types/serve-index": "^1.7.29",
     "copyfiles": "^2.1.0",
     "nodemon": "^1.18.4",
     "prettier": "^1.14.3",
@@ -26,5 +27,8 @@
     "tslint-plugin-prettier": "^2.0.0",
     "typescript": "^3.1.3"
   },
-  "dependencies": {}
+  "dependencies": {
+    "express": "^4.16.4",
+    "serve-index": "^1.9.1"
+  }
 }
