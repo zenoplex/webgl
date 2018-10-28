@@ -1,6 +1,7 @@
 {
   "compilerOptions": {
     "strict": true,
+    "allowJs": true,
     "rootDir": "src",
     "module": "commonjs",
     "esModuleInterop": true,
