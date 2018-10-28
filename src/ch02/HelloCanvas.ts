@@ -1,7 +1,7 @@
 const fn = () => {
-  const canvas = document.querySelector('#example');
+  const canvas: HTMLCanvasElement | null = document.querySelector('#example');
 
-  const gl = getWebGLContext(canvas, true);
+  const gl = getWebGLContext(canvas);
   if (!gl) {
     console.error('Failed to get the rendering context for WebGL');
   }
