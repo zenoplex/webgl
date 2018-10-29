@@ -6,8 +6,8 @@
  * @param fshader a fragment shader program (string)
  * @return true, if the program object was created and successfully made current 
  */
-function initShaders(gl, vshader, fshader) {
-  var program = createProgram(gl, vshader, fshader);
+const initShaders = (gl: HTMLCanvasElement, vshader: string , fshader: string): boolean => {
+  const program = createProgram(gl, vshader, fshader);
   if (!program) {
     console.log('Failed to create program');
     return false;
