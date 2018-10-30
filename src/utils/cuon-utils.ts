@@ -1,12 +1,18 @@
+// @ts-nocheck
+
 // cuon-utils.js (c) 2012 kanda and matsuda
 /**
  * Create a program object and make current
  * @param gl GL context
  * @param vshader a vertex shader program (string)
  * @param fshader a fragment shader program (string)
- * @return true, if the program object was created and successfully made current 
+ * @return true, if the program object was created and successfully made current
  */
-const initShaders = (gl: HTMLCanvasElement, vshader: string , fshader: string): boolean => {
+const initShaders = (
+  gl: WebGLRenderingContext,
+  vshader: string,
+  fshader: string
+): boolean => {
   const program = createProgram(gl, vshader, fshader);
   if (!program) {
     console.log('Failed to create program');
@@ -14,10 +20,11 @@ const initShaders = (gl: HTMLCanvasElement, vshader: string , fshader: string): 
   }
 
   gl.useProgram(program);
+  // @ts-ignore
   gl.program = program;
 
   return true;
-}
+};
 
 /**
  * Create the linked program object
@@ -26,16 +33,20 @@ const initShaders = (gl: HTMLCanvasElement, vshader: string , fshader: string): 
  * @param fshader a fragment shader program (string)
  * @return created program object, or null if the creation has failed
  */
-function createProgram(gl, vshader, fshader) {
+const createProgram = (
+  gl: WebGLRenderingContext,
+  vshader: string,
+  fshader: string
+) => {
   // Create shader object
-  var vertexShader = loadShader(gl, gl.VERTEX_SHADER, vshader);
-  var fragmentShader = loadShader(gl, gl.FRAGMENT_SHADER, fshader);
+  const vertexShader = loadShader(gl, gl.VERTEX_SHADER, vshader);
+  const fragmentShader = loadShader(gl, gl.FRAGMENT_SHADER, fshader);
   if (!vertexShader || !fragmentShader) {
     return null;
   }
 
   // Create a program object
-  var program = gl.createProgram();
+  const program = gl.createProgram();
   if (!program) {
     return null;
   }
@@ -48,9 +59,9 @@ function createProgram(gl, vshader, fshader) {
   gl.linkProgram(program);
 
   // Check the result of linking
-  var linked = gl.getProgramParameter(program, gl.LINK_STATUS);
+  const linked = gl.getProgramParameter(program, gl.LINK_STATUS);
   if (!linked) {
-    var error = gl.getProgramInfoLog(program);
+    const error = gl.getProgramInfoLog(program);
     console.log('Failed to link program: ' + error);
     gl.deleteProgram(program);
     gl.deleteShader(fragmentShader);
@@ -58,7 +69,7 @@ function createProgram(gl, vshader, fshader) {
     return null;
   }
   return program;
-}
+};
 
 /**
  * Create a shader object
@@ -67,9 +78,13 @@ function createProgram(gl, vshader, fshader) {
  * @param source shader program (string)
  * @return created shader object, or null if the creation has failed.
  */
-function loadShader(gl, type, source) {
+const loadShader = (
+  gl: WebGLRenderingContext,
+  type: number,
+  source: string
+) => {
   // Create shader object
-  var shader = gl.createShader(type);
+  const shader = gl.createShader(type);
   if (shader == null) {
     console.log('unable to create shader');
     return null;
@@ -82,28 +97,33 @@ function loadShader(gl, type, source) {
   gl.compileShader(shader);
 
   // Check the result of compilation
-  var compiled = gl.getShaderParameter(shader, gl.COMPILE_STATUS);
+  const compiled = gl.getShaderParameter(shader, gl.COMPILE_STATUS);
   if (!compiled) {
-    var error = gl.getShaderInfoLog(shader);
+    const error = gl.getShaderInfoLog(shader);
     console.log('Failed to compile shader: ' + error);
     gl.deleteShader(shader);
     return null;
   }
 
   return shader;
-}
+};
 
-/** 
+/**
  * Initialize and get the rendering for WebGL
  * @param canvas <cavnas> element
- * @param opt_debug flag to initialize the context for debugging
+ * @param debug flag to initialize the context for debugging
  * @return the rendering context for WebGL
  */
-const getWebGLContext = (canvas: HTMLCanvasElement | null, opt_debug?: boolean = true) => {
+const getWebGLContext = (
+  canvas: HTMLCanvasElement | null,
+  debug: boolean = true
+) => {
   // Get the rendering context for WebGL
   const gl = WebGLUtils.setupWebGL(canvas);
-  if (!gl) return null;
+  if (!gl) {
+    return null;
+  }
 
   // if opt_debug is explicitly false, create the context for debugging
-  return opt_debug ? WebGLDebugUtils.makeDebugContext(gl) : gl;
-}
+  return debug ? WebGLDebugUtils.makeDebugContext(gl) : gl;
+};
