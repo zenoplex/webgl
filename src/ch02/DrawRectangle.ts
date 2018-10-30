@@ -1,4 +1,4 @@
-const main = () => {
+export const main = () => {
   const canvas: HTMLCanvasElement | null = document.querySelector('#example');
   if (!canvas) {
     console.warn('Failed to retrieve the <canvas> element');
