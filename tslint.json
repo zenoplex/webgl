@@ -10,7 +10,8 @@
             {"singleQuote": true}
         ],
         "interface-name": [false],
-        "no-console": [false]
+        "no-console": [false],
+        "object-literal-sort-keys": [false]
     },
     "rulesDirectory": ["tslint-plugin-prettier"]
 }
