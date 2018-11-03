@@ -5,22 +5,21 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 const CleanWebpackPlugin = require('clean-webpack-plugin');
 const ForkTsCheckerWebpackPlugin = require('fork-ts-checker-webpack-plugin')
 
-const sources = glob.sync('./src/**/*.{ts,js}')
+const sources = glob.sync('./src/**/*.{js,ts}').filter(item => !/d.ts/.test(item))
 
 const entries = sources.reduce((acc, item) => {
   const p = path.parse(item);
-  acc[`${p.name}${p.ext}`]= item;
+  acc[`${p.dir.replace('src/', '')}/${p.name}`]= item;
   return acc;
 }, {});
 
 const pages = Object.keys(entries).filter(item => !/utils/.test(entries[item])).map(item => {
   const p = path.parse(entries[item]);
-  const outDir = p.dir.split(path.sep).slice(2).join(path.sep)
   
   return new HtmlWebpackPlugin({
   template: './src/assets/template.html',
   chunks: [item],
-  filename: `${outDir}/${p.name}.html`,
+  filename: `${item}.html`,
 })})
 
 /**
@@ -57,6 +56,6 @@ module.exports = {
   ],
   output: {
     filename: '[name].bundle.js',
-    path: path.resolve(__dirname, 'dist')
+    path: path.resolve(__dirname, 'dist'),
   }
 };
