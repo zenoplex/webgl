@@ -1,4 +1,4 @@
-// @ts-nocheck
+import { WebGLUtils } from './webGLUtils';
 
 // cuon-utils.js (c) 2012 kanda and matsuda
 /**
@@ -8,7 +8,7 @@
  * @param fshader a fragment shader program (string)
  * @return true, if the program object was created and successfully made current
  */
-const initShaders = (
+export const initShaders = (
   gl: WebGLRenderingContext,
   vshader: string,
   fshader: string
@@ -33,7 +33,7 @@ const initShaders = (
  * @param fshader a fragment shader program (string)
  * @return created program object, or null if the creation has failed
  */
-const createProgram = (
+export const createProgram = (
   gl: WebGLRenderingContext,
   vshader: string,
   fshader: string
@@ -78,7 +78,7 @@ const createProgram = (
  * @param source shader program (string)
  * @return created shader object, or null if the creation has failed.
  */
-const loadShader = (
+export const loadShader = (
   gl: WebGLRenderingContext,
   type: number,
   source: string
@@ -114,8 +114,8 @@ const loadShader = (
  * @param debug flag to initialize the context for debugging
  * @return the rendering context for WebGL
  */
-const getWebGLContext = (
-  canvas: HTMLCanvasElement | null,
+export const getWebGLContext = (
+  canvas: HTMLCanvasElement,
   debug: boolean = true
 ) => {
   // Get the rendering context for WebGL
