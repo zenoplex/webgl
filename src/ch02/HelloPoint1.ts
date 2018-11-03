@@ -1,3 +1,5 @@
+import { getWebGLContext, initShaders } from '../utils/cuonUtils';
+
 const VSHADER_SOURCE = `void main() {
   gl_Position = vec4(0.0, 0.0, 0.0, 1.0);
   gl_PointSize = 10.0;
@@ -10,7 +12,11 @@ void main() {
 }`;
 
 export const main = () => {
-  const canvas: HTMLCanvasElement | null = document.querySelector('#example');
+  const canvas = document.createElement('canvas');
+  canvas.width = 400;
+  canvas.height = 400;
+  document.body.append(canvas);
+
   const gl = getWebGLContext(canvas);
 
   if (!gl) {

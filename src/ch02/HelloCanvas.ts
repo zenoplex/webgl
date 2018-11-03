@@ -1,5 +1,10 @@
-const fn = () => {
-  const canvas: HTMLCanvasElement | null = document.querySelector('#example');
+import { getWebGLContext } from '../utils/cuonUtils';
+
+export const main = () => {
+  const canvas = document.createElement('canvas');
+  canvas.width = 400;
+  canvas.height = 400;
+  document.body.append(canvas);
 
   const gl = getWebGLContext(canvas);
   if (!gl) {
@@ -10,4 +15,4 @@ const fn = () => {
   gl.clear(gl.COLOR_BUFFER_BIT);
 };
 
-fn();
+main();
