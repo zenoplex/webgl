@@ -6,13 +6,13 @@ import { WebGLUtils } from './webGLUtils';
  * @param gl GL context
  * @param vshader a vertex shader program (string)
  * @param fshader a fragment shader program (string)
- * @return true, if the program object was created and successfully made current
+ * @return WebGLProgram or null
  */
 export const initShaders = (
   gl: WebGLRenderingContext,
   vshader: string,
   fshader: string
-): boolean => {
+): WebGLProgram | null => {
   const program = createProgram(gl, vshader, fshader);
   if (!program) {
     console.log('Failed to create program');
@@ -20,10 +20,7 @@ export const initShaders = (
   }
 
   gl.useProgram(program);
-  // @ts-ignore
-  gl.program = program;
-
-  return true;
+  return program;
 };
 
 /**
@@ -117,7 +114,7 @@ export const loadShader = (
 export const getWebGLContext = (
   canvas: HTMLCanvasElement,
   debug: boolean = true
-) => {
+): WebGLRenderingContext | null => {
   // Get the rendering context for WebGL
   const gl = WebGLUtils.setupWebGL(canvas);
   if (!gl) {
