@@ -1,9 +1,11 @@
 import { getWebGLContext, initShaders } from '../utils/cuonUtils';
 
-const VSHADER_SOURCE = `attribute vec4 aPosition;
+const VSHADER_SOURCE = `
+attribute vec4 aPosition;
+attribute float aPointSize;
 void main() {
   gl_Position = aPosition;
-  gl_PointSize = 10.0;
+  gl_PointSize = aPointSize;
 }
 `;
 
@@ -31,12 +33,14 @@ export const main = () => {
   }
 
   const aPosition = gl.getAttribLocation(program, 'aPosition');
+  const aPointSize = gl.getAttribLocation(program, 'aPointSize');
   if (aPosition < 0) {
     console.error('Failed to get the storage locatoin of aPosition');
   }
   gl.vertexAttrib3f(aPosition, 0.0, 0.0, 0.0);
   // Below works too
   // gl.vertexAttrib3fv(aPosition, [0.0, 0.0, 0.0]);
+  gl.vertexAttrib1f(aPointSize, 5.0);
 
   gl.clearColor(0.0, 0.0, 0.0, 1.0);
   gl.clear(gl.COLOR_BUFFER_BIT);
