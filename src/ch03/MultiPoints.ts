@@ -20,20 +20,25 @@ const initVertexBuffers = (
   const verticies = new Float32Array([0.0, 0.5, -0.5, -0.5, 0.5, -0.5]);
   const vertexCount = 3;
 
+  // Create a buffer object
   const vertextBuffer = gl.createBuffer();
   if (!vertextBuffer) {
     console.error('Failed to create buffer');
     return -1;
   }
 
+  // Bind a Buffer Object to a Target
   gl.bindBuffer(gl.ARRAY_BUFFER, vertextBuffer);
+  // Write Data into a Buffer Object
   gl.bufferData(gl.ARRAY_BUFFER, verticies, gl.STATIC_DRAW);
 
   const aPosition = gl.getAttribLocation(program, 'aPosition');
   if (aPosition < 0) {
     console.error('Failed to get the storage locatoin of aPosition');
   }
+  // Assign a buffer object to an attribute variable
   gl.vertexAttribPointer(aPosition, 2, gl.FLOAT, false, 0, 0);
+  // Enable the assignment to an attribute variable
   gl.enableVertexAttribArray(aPosition);
 
   return vertexCount;
