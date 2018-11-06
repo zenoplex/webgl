@@ -5,7 +5,7 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 const CleanWebpackPlugin = require('clean-webpack-plugin');
 const ForkTsCheckerWebpackPlugin = require('fork-ts-checker-webpack-plugin')
 
-const sources = glob.sync('./src/**/*.{js,ts}').filter(item => !/d.ts/.test(item))
+const sources = glob.sync('./src/**/*.{js,ts}').filter(item => !/\.d\.ts/.test(item))
 
 const entries = sources.reduce((acc, item) => {
   const p = path.parse(item);
