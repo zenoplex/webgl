@@ -9,6 +9,13 @@ export class Vector3 {
     this.z = z;
   }
 
+  public set = (x: number = 0, y: number = 0, z: number = 0) => {
+    this.x = x;
+    this.y = y;
+    this.z = z;
+    return this;
+  };
+
   public add = (v: Vector3) => {
     this.x += v.x;
     this.y += v.y;
@@ -90,12 +97,6 @@ export class Vector3 {
       this.multiply(max);
     }
     return this;
-  };
-
-  public set = (x: number = 0, y: number = 0, z: number = 0) => {
-    this.x = x;
-    this.y = y;
-    this.z = z;
   };
 
   public toAngles = () => {
