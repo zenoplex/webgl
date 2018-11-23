@@ -1,10 +1,10 @@
 import { Vector3 } from './Vector3';
 import { Vector4 } from './Vector4';
 
-class Matrix4 {
+export class Matrix4 {
   public static unit = [1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1];
 
-  private elements: Float32Array = new Float32Array(Matrix4.unit);
+  public elements: Float32Array = new Float32Array(Matrix4.unit);
   constructor(source?: Matrix4) {
     if (source) {
       this.set(source);
