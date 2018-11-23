@@ -67,7 +67,7 @@ export const main = () => {
   }
 
   const matrix = new Matrix4();
-  matrix.rotate(angle, 0, 0, 1);
+  matrix.setRotate(angle, 0, 0, 1);
   // tslint:enable prettier
   const uMatrix = gl.getUniformLocation(program, 'uMatrix');
   gl.uniformMatrix4fv(uMatrix, false, matrix.elements);
