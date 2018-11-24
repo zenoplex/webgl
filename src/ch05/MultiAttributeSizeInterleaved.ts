@@ -49,7 +49,7 @@ const initVertexBuffers = (
   gl.enableVertexAttribArray(aPosition);
 
   const aPointSize = gl.getAttribLocation(program, 'aPointSize');
-  if (aPosition < 0) {
+  if (aPointSize < 0) {
     console.error('Failed to get the storage locatoin of aPointSize');
   }
 
