@@ -45,9 +45,6 @@ const initVertexBuffers = (
   return vertexCount;
 };
 
-// Rotation in angle
-const ANGLE_STEP = 45.0;
-
 const draw = (
   gl: WebGLRenderingContext,
   count: number,
@@ -61,14 +58,20 @@ const draw = (
   gl.drawArrays(gl.TRIANGLES, 0, count);
 };
 
-let last = Date.now();
-const animate = (angle: number) => {
-  const now = Date.now();
-  const elapsed = now - last;
-  last = now;
-  let newAngle = angle + (ANGLE_STEP * elapsed) / 1000.0;
-  return (newAngle %= 360);
-};
+const animate = (() => {
+  // Rotation in angle
+  const ANGLE_STEP = 45.0;
+
+  let last = Date.now();
+
+  return (angle: number) => {
+    const now = Date.now();
+    const elapsed = now - last;
+    last = now;
+    const newAngle = angle + (((ANGLE_STEP * elapsed) / 1000.0) % 360);
+    return newAngle;
+  };
+})();
 
 export const main = () => {
   const canvas = document.createElement('canvas');
