@@ -52,7 +52,7 @@ const draw = (
   model: Matrix4,
   uModel: WebGLUniformLocation | null
 ) => {
-  model.setRotate(currentAngle, 0, 0, 1);
+  model.setRotate(currentAngle, 0, 0, 1).translate(0.35, 0, 0);
   gl.uniformMatrix4fv(uModel, false, model.elements);
   gl.clear(gl.COLOR_BUFFER_BIT);
   gl.drawArrays(gl.TRIANGLES, 0, count);
