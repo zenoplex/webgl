@@ -13,7 +13,9 @@ void main() {
 `;
 
 const FSHADER_SOURCE = `
+#ifdef GL_ES
 precision mediump float;
+#endif
 uniform sampler2D uSampler0;
 uniform sampler2D uSampler1;
 varying vec2 vTexCoord;
