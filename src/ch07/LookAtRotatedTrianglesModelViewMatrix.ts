@@ -100,13 +100,10 @@ const main = () => {
     return;
   }
 
-  const viewMatrix = new Matrix4();
-  viewMatrix.setLookAt(0.2, 0.25, 0.25, 0, 0, 0, 0, 1, 0);
-
-  const modelMatrix = new Matrix4();
-  modelMatrix.setRotate(-10, 0, 0, 1);
-
-  const modelViewMatrix = viewMatrix.multiply(modelMatrix);
+  const modelViewMatrix = new Matrix4();
+  modelViewMatrix
+    .setLookAt(0.2, 0.25, 0.25, 0, 0, 0, 0, 1, 0)
+    .rotate(-10, 0, 0, 1);
 
   gl.uniformMatrix4fv(uModelViewMatrix, false, modelViewMatrix.elements);
 
