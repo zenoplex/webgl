@@ -20,6 +20,7 @@ const pages = Object.keys(entries).filter(item => !/utils/.test(entries[item])).
   template: './src/assets/template.html',
   chunks: [item],
   filename: `${item}.html`,
+  development: true,
 })})
 
 /**

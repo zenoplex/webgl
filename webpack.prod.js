@@ -21,6 +21,7 @@ const pages = Object.keys(entries).filter(item => !/utils/.test(entries[item])).
   template: './src/assets/template.html',
   chunks: [item],
   filename: `${item}.html`,
+  
 })})
 
 /**
@@ -61,11 +62,11 @@ module.exports = {
   optimization: {
     minimizer: [new UglifyJsWebpackPlugin()],
     concatenateModules: true,
+    runtimeChunk: true,
     splitChunks: {
-      chunks: 'async',
+      chunks: 'all',
       maxAsyncRequests: Infinity,
       maxInitialRequests: Infinity,
-      automaticNameDelimiter: '~',
       name: true,
       cacheGroups: {
         vendors: {
