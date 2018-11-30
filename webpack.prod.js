@@ -1,10 +1,13 @@
 // @ts-check
 const path = require('path');
 const glob = require('glob');
+const webpack = require('webpack');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const CleanWebpackPlugin = require('clean-webpack-plugin');
 const ForkTsCheckerWebpackPlugin = require('fork-ts-checker-webpack-plugin')
 const UglifyJsWebpackPlugin = require('uglifyjs-webpack-plugin');
+
+const { NODE_ENV } = process.env;
 
 const sources = glob.sync('./src/**/*.{js,ts}').filter(item => !/\.d\.ts/.test(item))
 
@@ -57,6 +60,11 @@ module.exports = {
   plugins: [
     new CleanWebpackPlugin(['dist']),
     new ForkTsCheckerWebpackPlugin(),
+    new webpack.DefinePlugin({
+      'process.env': {
+        NODE_ENV: JSON.stringify(NODE_ENV),
+      }
+    }),
     ...pages,
   ],
   optimization: {
