@@ -1,3 +1,4 @@
+import { nodeEnv } from '../env';
 import { WebGLUtils } from './webGLUtils';
 
 // cuon-utils.js (c) 2012 kanda and matsuda
@@ -112,8 +113,7 @@ export const loadShader = (
  * @return the rendering context for WebGL
  */
 export const getWebGLContext = (
-  canvas: HTMLCanvasElement,
-  debug: boolean = false
+  canvas: HTMLCanvasElement
 ): WebGLRenderingContext | null => {
   // Get the rendering context for WebGL
   const gl = WebGLUtils.setupWebGL(canvas);
@@ -122,5 +122,5 @@ export const getWebGLContext = (
   }
 
   // if opt_debug is explicitly false, create the context for debugging
-  return debug ? WebGLDebugUtils.makeDebugContext(gl) : gl;
+  return nodeEnv === 'development' ? WebGLDebugUtils.makeDebugContext(gl) : gl;
 };
