@@ -113,7 +113,7 @@ export const loadShader = (
  */
 export const getWebGLContext = (
   canvas: HTMLCanvasElement,
-  debug: boolean = true
+  debug: boolean = false
 ): WebGLRenderingContext | null => {
   // Get the rendering context for WebGL
   const gl = WebGLUtils.setupWebGL(canvas);
